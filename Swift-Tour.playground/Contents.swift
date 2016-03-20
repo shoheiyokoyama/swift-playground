@@ -432,6 +432,43 @@ let protocolValue: ExampleProtocol = a
 print(protocolValue.simpleDescription)
 
 
+func repeatItem<Item>(item: Item, numberOfTimes: Int) -> [Item] {
+    var result = [Item]()
+    for _ in 0..<numberOfTimes {
+        result.append(item)
+    }
+    return result
+}
+
+repeatItem("kbnock", numberOfTimes: 4)
+
+
+enum OptionalValue<Wrapped> {
+    case None
+    case Some(Wrapped)
+}
+
+var posiibleInteger: OptionalValue<Int> = .None
+posiibleInteger = .Some(100)
+
+func anyCommonElements <T: SequenceType, U: SequenceType where T.Generator.Element: Equatable, T.Generator.Element == U.Generator.Element>
+    (lhs: T, _ rhs: U) -> Bool {
+        for lhsItem in lhs {
+            for rhsItem in rhs {
+                if lhsItem == rhsItem {
+                    return true
+                }
+            }
+        }
+        return false
+}
+
+anyCommonElements([1, 2, 3], [3])
+
+
+
+
+
 
 
 
