@@ -194,6 +194,95 @@ enum Result<T, U> {
 }
 
 
+//Type Constraint Syntax
+class SomeClass{}
+protocol SomeProtocol {}
+func someFunction<T: SomeClass, U: SomeProtocol>(someT: T, someU: U) {
+    // function body goes here
+}
+
+
+//func findLargestInArray<T>(array: [T]) -> T? {
+//    if array.isEmpty { return nil }
+//    
+//    var largestValue = array.first
+//    array.forEach { val in
+//        largestValue = val > largestValue ? val : largestValue
+//    }
+//    return largestValue
+//}
+
+func findLargestInArray<T: Comparable>(array: [T]) -> T? {
+    if array.isEmpty { return nil }
+    
+    var largestValue = array.first
+    array.forEach { val in
+        largestValue = val > largestValue ? val : largestValue
+    }
+    return largestValue
+}
+
+//let array = [1, 2, 3, 5, 7, 10]
+//let largestValue = findLargestInArray(array)
+//print(largestValue)
+
+func allItemsMatch<C1: Container, C2: Container
+    where C1.ItemType == C2.ItemType, C1.ItemType: Equatable>
+    (someContainer: C1, _ anotherContainer: C2) -> Bool {
+    
+    if someContainer.count != anotherContainer.count {
+        return false
+    }
+    
+    for i in 0..<someContainer.count {
+        if someContainer[i] != anotherContainer[i] {
+            return false
+        }
+    }
+    return true
+}
+
+
+//let oddArray = ["one", "two", "three"]
+//let anotherOddArray = ["one", "two", "three"]
+//allItemsMatch(oddArray, anotherOddArray)
+
+var stackOfStrings = Queue<String>()
+stackOfStrings.append("uno")
+stackOfStrings.append("dos")
+stackOfStrings.append("tres")
+
+var arrayOfStrings = ["uno", "dos", "tres"]
+
+extension CollectionType where Self.Generator.Element: Comparable {
+    
+    func largestValue() -> Generator.Element? {
+        guard var largestValue = first else { return nil }
+        
+        for item in self {
+            
+            
+            if item > largestValue {
+                largestValue = item
+            }
+        }
+        return largestValue
+    }
+}
+
+[1, 2, 3, 4, 5].largestValue()//5
+"Generics".characters.largestValue()//s
+(0..<1000).largestValue()//999
+
+
+
+
+
+
+
+
+
+
 
 
 
